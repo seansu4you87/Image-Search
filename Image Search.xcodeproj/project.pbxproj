@@ -35,7 +35,8 @@
 		AC6E7D6C15C629760016136F /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D6015C629760016136F /* AFURLConnectionOperation.m */; };
 		AC6E7D6D15C629760016136F /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D6215C629760016136F /* AFXMLRequestOperation.m */; };
 		AC6E7D6E15C629760016136F /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D6415C629760016136F /* UIImageView+AFNetworking.m */; };
-		AC6E7D7115C62A4A0016136F /* GoogleAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D7015C62A4A0016136F /* GoogleAPI.m */; };
+		AC6E7D7115C62A4A0016136F /* ISServer.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D7015C62A4A0016136F /* ISServer.m */; };
+		AC6E7D7715C62FE70016136F /* ISSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D7615C62FE70016136F /* ISSearchResult.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,8 +95,10 @@
 		AC6E7D6215C629760016136F /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		AC6E7D6315C629760016136F /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		AC6E7D6415C629760016136F /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		AC6E7D6F15C62A4A0016136F /* GoogleAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleAPI.h; sourceTree = "<group>"; };
-		AC6E7D7015C62A4A0016136F /* GoogleAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleAPI.m; sourceTree = "<group>"; };
+		AC6E7D6F15C62A4A0016136F /* ISServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISServer.h; sourceTree = "<group>"; };
+		AC6E7D7015C62A4A0016136F /* ISServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISServer.m; sourceTree = "<group>"; };
+		AC6E7D7515C62FE70016136F /* ISSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISSearchResult.h; sourceTree = "<group>"; };
+		AC6E7D7615C62FE70016136F /* ISSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISSearchResult.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,15 +159,14 @@
 		AC6E7D1315C61C5A0016136F /* Image Search */ = {
 			isa = PBXGroup;
 			children = (
+				AC6E7D7215C62F4D0016136F /* Model */,
+				AC6E7D7315C62F520016136F /* View */,
+				AC6E7D7415C62F560016136F /* Controller */,
 				AC6E7D1C15C61C5A0016136F /* ISAppDelegate.h */,
 				AC6E7D1D15C61C5A0016136F /* ISAppDelegate.m */,
 				AC6E7D1F15C61C5A0016136F /* MainStoryboard_iPhone.storyboard */,
 				AC6E7D2215C61C5A0016136F /* MainStoryboard_iPad.storyboard */,
-				AC6E7D2515C61C5A0016136F /* ISViewController.h */,
-				AC6E7D2615C61C5A0016136F /* ISViewController.m */,
 				AC6E7D1415C61C5A0016136F /* Supporting Files */,
-				AC6E7D6F15C62A4A0016136F /* GoogleAPI.h */,
-				AC6E7D7015C62A4A0016136F /* GoogleAPI.m */,
 			);
 			path = "Image Search";
 			sourceTree = "<group>";
@@ -246,6 +248,33 @@
 			);
 			name = AFNetworking;
 			path = AFNetworking/AFNetworking;
+			sourceTree = "<group>";
+		};
+		AC6E7D7215C62F4D0016136F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AC6E7D6F15C62A4A0016136F /* ISServer.h */,
+				AC6E7D7015C62A4A0016136F /* ISServer.m */,
+				AC6E7D7515C62FE70016136F /* ISSearchResult.h */,
+				AC6E7D7615C62FE70016136F /* ISSearchResult.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		AC6E7D7315C62F520016136F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		AC6E7D7415C62F560016136F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AC6E7D2515C61C5A0016136F /* ISViewController.h */,
+				AC6E7D2615C61C5A0016136F /* ISViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,7 +402,8 @@
 				AC6E7D6C15C629760016136F /* AFURLConnectionOperation.m in Sources */,
 				AC6E7D6D15C629760016136F /* AFXMLRequestOperation.m in Sources */,
 				AC6E7D6E15C629760016136F /* UIImageView+AFNetworking.m in Sources */,
-				AC6E7D7115C62A4A0016136F /* GoogleAPI.m in Sources */,
+				AC6E7D7115C62A4A0016136F /* ISServer.m in Sources */,
+				AC6E7D7715C62FE70016136F /* ISSearchResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
