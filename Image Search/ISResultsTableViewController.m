@@ -11,6 +11,7 @@
 
 @interface ISResultsTableViewController ()
 {
+	NSString *query;
 	NSArray *results;
 }
 
@@ -23,15 +24,18 @@
 
 - (void)dealloc
 {
+	[query release];
 	[results release];
 	
 	[super dealloc];
 }
 
-- (id)initWithQuery:(NSString *)query
+- (id)initWithQuery:(NSString *)queryString
 {
     if (self = [super initWithStyle:UITableViewStylePlain])
 	{
+		query = [queryString retain];
+		
 		self.title = [NSString stringWithFormat:@"\"%@\"", query];
 		[self getData];
 	}
@@ -55,7 +59,7 @@
 
 - (void)getData
 {
-	[ISServer imageSearchWithQuery:@"panda" success:^(id data){
+	[ISServer imageSearchWithQuery:query success:^(id data){
 		
 		[results release];
 		results = [data retain];
@@ -64,7 +68,7 @@
 	} failure:^(NSError *error){
 		
 		[results release];
-		results = nil;
+		results = [NSArray array];
 		[self gotData];
 		
 	}];
@@ -72,7 +76,7 @@
 
 - (void)gotData
 {
-	
+	NSLog(@"results: %@", results);
 }
 
 #pragma mark - Table view data source

@@ -10,6 +10,6 @@
 
 @interface ISResultsTableViewController : UITableViewController
 
-- (id)initWithQuery:(NSString *)query;
+- (id)initWithQuery:(NSString *)queryString;
 
 @end
