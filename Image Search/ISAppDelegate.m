@@ -7,6 +7,7 @@
 //
 
 #import "ISAppDelegate.h"
+#import "GoogleAPI.h"
 
 @implementation ISAppDelegate
 
@@ -21,7 +22,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    return YES;
+	[GoogleAPI imageSearchWithQuery:@"panda"];
+    return YES;	
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
