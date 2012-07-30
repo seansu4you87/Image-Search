@@ -14,6 +14,9 @@
 	NSArray *results;
 }
 
+- (void)getData;
+- (void)gotData;
+
 @end
 
 @implementation ISResultsTableViewController
@@ -30,16 +33,7 @@
     if (self = [super initWithStyle:UITableViewStylePlain])
 	{
 		self.title = [NSString stringWithFormat:@"\"%@\"", query];
-		
-		[ISServer imageSearchWithQuery:@"panda" success:^(id data){
-			
-			results = [data retain];
-			
-		} failure:^(NSError *error){
-			
-			
-			
-		}];
+		[self getData];
 	}
 	return self;
 }
@@ -57,6 +51,28 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)getData
+{
+	[ISServer imageSearchWithQuery:@"panda" success:^(id data){
+		
+		[results release];
+		results = [data retain];
+		[self gotData];
+		
+	} failure:^(NSError *error){
+		
+		[results release];
+		results = nil;
+		[self gotData];
+		
+	}];
+}
+
+- (void)gotData
+{
+	
 }
 
 #pragma mark - Table view data source
