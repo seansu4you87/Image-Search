@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ISResultsTableViewController : UITableViewController
+@interface ISResultsViewController : UITableViewController
 
 - (id)initWithQuery:(NSString *)queryString;
 

@@ -7,7 +7,7 @@
 //
 
 #import "ISSearchViewController.h"
-#import "ISResultsTableViewController.h"
+#import "ISResultsViewController.h"
 
 @interface ISSearchViewController ()
 {
@@ -72,7 +72,7 @@
 
 - (void)pushResultsViewController
 {
-	ISResultsTableViewController *resultsTVC = [[ISResultsTableViewController alloc] initWithQuery:searchTextField.text];
+	ISResultsViewController *resultsTVC = [[ISResultsViewController alloc] initWithQuery:searchTextField.text];
 	[self.navigationController pushViewController:resultsTVC animated:YES];
 	[resultsTVC release];
 }

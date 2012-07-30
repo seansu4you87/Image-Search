@@ -37,7 +37,8 @@
 		AC6E7D6E15C629760016136F /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D6415C629760016136F /* UIImageView+AFNetworking.m */; };
 		AC6E7D7115C62A4A0016136F /* ISServer.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D7015C62A4A0016136F /* ISServer.m */; };
 		AC6E7D7715C62FE70016136F /* ISSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D7615C62FE70016136F /* ISSearchResult.m */; };
-		AC6E7D7A15C665DE0016136F /* ISResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D7915C665DE0016136F /* ISResultsTableViewController.m */; };
+		AC6E7D7A15C665DE0016136F /* ISResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D7915C665DE0016136F /* ISResultsViewController.m */; };
+		AC6E7D7D15C66C560016136F /* ISResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6E7D7C15C66C560016136F /* ISResultCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +64,7 @@
 		AC6E7D1D15C61C5A0016136F /* ISAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISAppDelegate.m; sourceTree = "<group>"; };
 		AC6E7D2015C61C5A0016136F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		AC6E7D2315C61C5A0016136F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		AC6E7D2515C61C5A0016136F /* ISSearchViewController.h */ = {isa = PBXFileReference; path = ISSearchViewController.h; sourceTree = "<group>"; };
+		AC6E7D2515C61C5A0016136F /* ISSearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISSearchViewController.h; sourceTree = "<group>"; };
 		AC6E7D2615C61C5A0016136F /* ISSearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISSearchViewController.m; sourceTree = "<group>"; };
 		AC6E7D2D15C61C5A0016136F /* Image SearchTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Image SearchTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC6E7D2E15C61C5B0016136F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -100,8 +101,10 @@
 		AC6E7D7015C62A4A0016136F /* ISServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISServer.m; sourceTree = "<group>"; };
 		AC6E7D7515C62FE70016136F /* ISSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISSearchResult.h; sourceTree = "<group>"; };
 		AC6E7D7615C62FE70016136F /* ISSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISSearchResult.m; sourceTree = "<group>"; };
-		AC6E7D7815C665DE0016136F /* ISResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ISResultsTableViewController.h; sourceTree = "<group>"; };
-		AC6E7D7915C665DE0016136F /* ISResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISResultsTableViewController.m; sourceTree = "<group>"; };
+		AC6E7D7815C665DE0016136F /* ISResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ISResultsViewController.h; sourceTree = "<group>"; };
+		AC6E7D7915C665DE0016136F /* ISResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISResultsViewController.m; sourceTree = "<group>"; };
+		AC6E7D7B15C66C560016136F /* ISResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISResultCell.h; sourceTree = "<group>"; };
+		AC6E7D7C15C66C560016136F /* ISResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISResultCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +270,8 @@
 		AC6E7D7315C62F520016136F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AC6E7D7B15C66C560016136F /* ISResultCell.h */,
+				AC6E7D7C15C66C560016136F /* ISResultCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -276,8 +281,8 @@
 			children = (
 				AC6E7D2515C61C5A0016136F /* ISSearchViewController.h */,
 				AC6E7D2615C61C5A0016136F /* ISSearchViewController.m */,
-				AC6E7D7815C665DE0016136F /* ISResultsTableViewController.h */,
-				AC6E7D7915C665DE0016136F /* ISResultsTableViewController.m */,
+				AC6E7D7815C665DE0016136F /* ISResultsViewController.h */,
+				AC6E7D7915C665DE0016136F /* ISResultsViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -409,7 +414,8 @@
 				AC6E7D6E15C629760016136F /* UIImageView+AFNetworking.m in Sources */,
 				AC6E7D7115C62A4A0016136F /* ISServer.m in Sources */,
 				AC6E7D7715C62FE70016136F /* ISSearchResult.m in Sources */,
-				AC6E7D7A15C665DE0016136F /* ISResultsTableViewController.m in Sources */,
+				AC6E7D7A15C665DE0016136F /* ISResultsViewController.m in Sources */,
+				AC6E7D7D15C66C560016136F /* ISResultCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Blackboard Mobile. All rights reserved.
 //
 
-#import "ISResultsTableViewController.h"
+#import "ISResultsViewController.h"
 #import "ISServer.h"
 
-@interface ISResultsTableViewController ()
+@interface ISResultsViewController ()
 {
 	NSString *query;
 	NSArray *results;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation ISResultsTableViewController
+@implementation ISResultsViewController
 
 - (void)dealloc
 {
