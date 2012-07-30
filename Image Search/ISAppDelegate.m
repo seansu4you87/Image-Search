@@ -7,7 +7,6 @@
 //
 
 #import "ISAppDelegate.h"
-#import "ISServer.h"
 
 @implementation ISAppDelegate
 
@@ -22,15 +21,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-	[ISServer imageSearchWithQuery:@"panda" success:^(id data){
-		
-		NSLog(@"%@", data);
-		
-	} failure:^(NSError *error){
-		
-		
-		
-	}];
     return YES;	
 }
 							

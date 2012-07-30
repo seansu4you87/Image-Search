@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface ISServer : NSObject
-{
-	
-}
 
 + (void)imageSearchWithQuery:(NSString *)query success:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 

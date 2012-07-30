@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ISViewController : UIViewController
+@interface ISSearchViewController : UIViewController<UITextFieldDelegate>
 
 @end
