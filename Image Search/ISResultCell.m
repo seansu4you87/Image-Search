@@ -69,10 +69,6 @@
 	[self.contentView addSubview:imageView1];
 	[self.contentView addSubview:imageView2];
 	[self.contentView addSubview:imageView3];	
-	
-	//imageView1.backgroundColor = [UIColor grayColor];
-	//imageView2.backgroundColor = [UIColor grayColor];
-	//imageView3.backgroundColor = [UIColor grayColor];
 }
 
 - (void)layoutSubviews
