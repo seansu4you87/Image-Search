@@ -11,22 +11,6 @@
 
 #import "AFJSONRequestOperation.h"
 
-@interface NSNull (private)
-
-- (id)objectForKey:(NSString *)key;
-
-
-@end
-
-@implementation NSNull (private)
-
-- (id)objectForKey:(NSString *)key
-{
-	
-}
-
-@end
-
 @implementation ISServer
 
 + (void)imageSearchWithQuery:(NSString *)query start:(int)start success:(void (^)(id data))success failure:(void (^)(NSError *error))failure
