@@ -6,14 +6,18 @@
 //  Copyright (c) 2012 Blackboard Mobile. All rights reserved.
 //
 
-#import "ISResultsViewController.h"
+#import "ISSearchResultsViewController.h"
 #import "ISResultCell.h"
+#import "ISSearchResult.h"
 #import "ISServer.h"
 
-@interface ISResultsViewController ()
+@interface ISSearchResultsViewController ()
 {
 	NSString *query;
-	NSArray *results;
+	NSMutableArray *results;
+	NSMutableArray *formattedResults;
+	
+	int count;
 }
 
 @property(readonly) ISResultsViewControllerDataState dataState;
@@ -23,12 +27,13 @@
 
 @end
 
-@implementation ISResultsViewController
+@implementation ISSearchResultsViewController
 
 - (void)dealloc
 {
 	[query release];
 	[results release];
+	[formattedResults release];
 	
 	[super dealloc];
 }
@@ -38,6 +43,8 @@
     if (self = [super initWithStyle:UITableViewStylePlain])
 	{
 		query = [queryString retain];
+		results = [[NSMutableArray alloc] init];
+		formattedResults = [[NSMutableArray alloc] init];
 		
 		self.title = [NSString stringWithFormat:@"\"%@\"", query];
 		[self getData];
@@ -62,9 +69,9 @@
 
 - (ISResultsViewControllerDataState)dataState
 {
-	if (results == nil)
+	if (formattedResults == nil)
 		return ISResultsViewControllerDataStateLoading;
-	else if ([results count] > 0)
+	else if ([formattedResults count] > 0)
 		return ISResultsViewControllerDataStateHasData;
 	else {
 		return ISResultsViewControllerDataStateNoResults;
@@ -73,17 +80,12 @@
 
 - (void)getData
 {
-	[ISServer imageSearchWithQuery:query success:^(id data){
+	[ISServer imageSearchWithQuery:query start:count success:^(id data){
 		
-		[results release];
-		results = [data retain];
+		[results addObjectsFromArray:data];
 		[self gotData];
 		
 	} failure:^(NSError *error){
-		
-		[results release];
-		results = [NSArray array];
-		[self gotData];
 		
 	}];
 }
@@ -91,6 +93,20 @@
 - (void)gotData
 {
 	NSLog(@"results: %@", results);
+	int oldCount = count;
+	count = [results count];
+	
+	for (int i = oldCount; i < count; i++)
+	{
+		ISSearchResult *result = [results objectAtIndex:i];
+		
+		int index = floor(i / 3.0);
+		if ([formattedResults count] <= index)
+			[formattedResults addObject:[NSMutableArray array]];
+		NSMutableArray *resultRow = [formattedResults objectAtIndex:index];
+		[resultRow addObject:result];
+	}
+	
 	[self.tableView reloadData];
 }
 
@@ -105,7 +121,7 @@
 {
 	if (self.dataState == ISResultsViewControllerDataStateHasData)
 	{
-		return ceil([results count] / 3.0);
+		return [formattedResults count] + 1;
 	}
 	else
 		return 1;
@@ -127,12 +143,25 @@
 	}
 	else
 	{
-		ISResultCell *resultCell = [[ISResultCell alloc] initWithReuseIdentifier:@"i"];
-		
-		
-		
-		[resultCell setImageUrls:urls];
-		return [resultCell autorelease];
+		if (indexPath.row < [formattedResults count])
+		{
+			ISResultCell *resultCell = [[ISResultCell alloc] initWithReuseIdentifier:@"i"];
+			
+			NSMutableArray *urls = [NSMutableArray array];
+			for (ISSearchResult *result in [formattedResults objectAtIndex:indexPath.row])
+			{
+				[urls addObject:result.url];
+			}
+			
+			[resultCell setImageUrls:urls];
+			return [resultCell autorelease];
+		}
+		else
+		{
+			UITableViewCell *loadMoreCell = [[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:@"i"];
+			loadMoreCell.textLabel.text = @"Load More Results...";
+			return [loadMoreCell autorelease];
+		}
 	}
 }
 
@@ -140,7 +169,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	
+	if (indexPath.row == [formattedResults count] && self.dataState == ISResultsViewControllerDataStateHasData)
+	{
+		[self getData];
+	}
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

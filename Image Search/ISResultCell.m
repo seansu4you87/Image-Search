@@ -45,13 +45,13 @@
 - (void)setImageUrls:(NSArray *)urls
 {
 	if ([urls count] >= 1)
-		[imageView1 setImageWithURL:[urls objectAtIndex:0] placeholderImage:nil];
+		[imageView1 setImageWithURL:[urls objectAtIndex:0] placeholderImage:[UIImage imageNamed:@"loading.png"]];
 	
 	if ([urls count] >= 2)
-		[imageView2 setImageWithURL:[urls objectAtIndex:1] placeholderImage:nil];
+		[imageView2 setImageWithURL:[urls objectAtIndex:1] placeholderImage:[UIImage imageNamed:@"loading.png"]];
 	
 	if ([urls count] >= 3)
-		[imageView3 setImageWithURL:[urls objectAtIndex:2] placeholderImage:nil];
+		[imageView3 setImageWithURL:[urls objectAtIndex:2] placeholderImage:[UIImage imageNamed:@"loading.png"]];
 	
 }
 
@@ -69,9 +69,9 @@
 	[self.contentView addSubview:imageView2];
 	[self.contentView addSubview:imageView3];	
 	
-	imageView1.backgroundColor = [UIColor redColor];
-	imageView2.backgroundColor = [UIColor blueColor];
-	imageView3.backgroundColor = [UIColor yellowColor];
+	//imageView1.backgroundColor = [UIColor grayColor];
+	//imageView2.backgroundColor = [UIColor grayColor];
+	//imageView3.backgroundColor = [UIColor grayColor];
 }
 
 - (void)layoutSubviews

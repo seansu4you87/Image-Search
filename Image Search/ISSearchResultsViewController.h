@@ -14,7 +14,7 @@ typedef enum {
 	ISResultsViewControllerDataStateHasData
 } ISResultsViewControllerDataState;
 
-@interface ISResultsViewController : UITableViewController
+@interface ISSearchResultsViewController : UITableViewController
 
 - (id)initWithQuery:(NSString *)queryString;
 

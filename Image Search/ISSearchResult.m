@@ -38,7 +38,7 @@
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"%@: \"%@\", %@", [super description], self.title, [self.url absoluteString]];
+	return [NSString stringWithFormat:@"%@: %@, %@", [super description], self.title, [self.url absoluteString]];
 }
 
 @end

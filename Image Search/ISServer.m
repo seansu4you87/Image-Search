@@ -13,9 +13,12 @@
 
 @implementation ISServer
 
-+ (void)imageSearchWithQuery:(NSString *)query success:(void (^)(id data))success failure:(void (^)(NSError *error))failure
++ (void)imageSearchWithQuery:(NSString *)query start:(int)start success:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
-	NSString *urlString = [NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%@", query];
+	NSString *urlString = [NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%@", [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+	if (start > 0)
+		urlString = [urlString stringByAppendingFormat:@"&start=%i", start];
+	NSLog(@"url: %@", urlString);
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request,NSHTTPURLResponse *response, id JSON) {

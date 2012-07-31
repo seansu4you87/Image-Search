@@ -10,6 +10,6 @@
 
 @interface ISServer : NSObject
 
-+ (void)imageSearchWithQuery:(NSString *)query success:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
++ (void)imageSearchWithQuery:(NSString *)query start:(int)start success:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 
 @end
