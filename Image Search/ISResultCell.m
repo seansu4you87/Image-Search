@@ -38,6 +38,7 @@
 		yMargin = 10;
 		
 		[self initializeImageViews];
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 	return self;
 }

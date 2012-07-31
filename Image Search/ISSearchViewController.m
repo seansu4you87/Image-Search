@@ -8,11 +8,14 @@
 
 #import "ISSearchViewController.h"
 #import "ISSearchResultsViewController.h"
+#import "ISSavedSearchesViewController.h"
+#import "ISSavedSearch.h"
 
 @interface ISSearchViewController ()
 {
 	UITextField *searchTextField;
 	UIButton *searchButton;
+	UIButton *savedSearchesButton;
 	
 	CGFloat xMargin, yMargin;
 }
@@ -21,9 +24,11 @@
 
 - (UITextField *)makeSearchTextField;
 - (UIButton *)makeSearchButton;
+- (UIButton *)makeSavedSearchesButton;
 
 - (CGRect)frameForSearchTextField;
 - (CGRect)frameForSearchButton;
+- (CGRect)frameForSavedSearchesButton;
 
 @end
 
@@ -33,6 +38,7 @@
 {
 	[searchTextField release];
 	[searchButton release];
+	[savedSearchesButton release];
 	
 	[super dealloc];
 }
@@ -54,9 +60,11 @@
 	
 	searchTextField = [[self makeSearchTextField] retain];
 	searchButton = [[self makeSearchButton] retain];
+	savedSearchesButton = [[self makeSavedSearchesButton] retain];
 	
 	[self.view addSubview:searchTextField];
 	[self.view addSubview:searchButton];
+	[self.view addSubview:savedSearchesButton];
 }
 
 - (void)viewDidUnload
@@ -72,9 +80,18 @@
 
 - (void)pushResultsViewController
 {
+	[ISSavedSearch saveSearchQuery:searchTextField.text];
+	
 	ISSearchResultsViewController *resultsTVC = [[ISSearchResultsViewController alloc] initWithQuery:searchTextField.text];
 	[self.navigationController pushViewController:resultsTVC animated:YES];
 	[resultsTVC release];
+}
+
+- (void)pushSavedSearchesViewController
+{
+	ISSavedSearchesViewController *savedTVC = [[ISSavedSearchesViewController alloc] initWithSavedSearches:[ISSavedSearch savedSearches]];
+	[self.navigationController pushViewController:savedTVC animated:YES];
+	[savedTVC release];
 }
 
 
@@ -99,6 +116,15 @@
 	return button;
 }
 
+- (UIButton *)makeSavedSearchesButton
+{
+	UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+	button.frame = [self frameForSavedSearchesButton];
+	[button setTitle:@"Saved Searches" forState:UIControlStateNormal];
+	[button addTarget:self action:@selector(pushSavedSearchesViewController) forControlEvents:UIControlEventTouchUpInside];
+	return button;
+}
+
 #pragma mark - Frame Sizing
 
 - (CGRect)frameForSearchTextField
@@ -110,6 +136,12 @@
 {
 	CGRect textFieldFrame = [self frameForSearchTextField];
 	return CGRectMake(xMargin, CGRectGetMaxY(textFieldFrame) + yMargin, self.view.frame.size.width - 2 * xMargin, 44);
+}
+
+- (CGRect)frameForSavedSearchesButton
+{
+	CGRect searchButtonFrame = [self frameForSearchButton];
+	return CGRectMake(xMargin, CGRectGetMaxY(searchButtonFrame) + yMargin, self.view.frame.size.width - 2 * xMargin, 44);
 }
 
 #pragma mark - UITextFieldDelegate methods
