@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+	ISResultsViewControllerDataStateLoading,
+	ISResultsViewControllerDataStateNoResults,
+	ISResultsViewControllerDataStateHasData
+} ISResultsViewControllerDataState;
+
 @interface ISResultsViewController : UITableViewController
 
 - (id)initWithQuery:(NSString *)queryString;

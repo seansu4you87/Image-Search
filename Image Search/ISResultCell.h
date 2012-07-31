@@ -10,4 +10,7 @@
 
 @interface ISResultCell : UITableViewCell
 
+- (id)initWithReuseIdentifier:(NSString *)reuse;
+- (void)setImageUrls:(NSArray *)urls;
+
 @end

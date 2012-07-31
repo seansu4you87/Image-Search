@@ -7,6 +7,7 @@
 //
 
 #import "ISResultsViewController.h"
+#import "ISResultCell.h"
 #import "ISServer.h"
 
 @interface ISResultsViewController ()
@@ -14,6 +15,8 @@
 	NSString *query;
 	NSArray *results;
 }
+
+@property(readonly) ISResultsViewControllerDataState dataState;
 
 - (void)getData;
 - (void)gotData;
@@ -57,6 +60,17 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (ISResultsViewControllerDataState)dataState
+{
+	if (results == nil)
+		return ISResultsViewControllerDataStateLoading;
+	else if ([results count] > 0)
+		return ISResultsViewControllerDataStateHasData;
+	else {
+		return ISResultsViewControllerDataStateNoResults;
+	}
+}
+
 - (void)getData
 {
 	[ISServer imageSearchWithQuery:query success:^(id data){
@@ -77,6 +91,7 @@
 - (void)gotData
 {
 	NSLog(@"results: %@", results);
+	[self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -88,12 +103,37 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return 5;
+	if (self.dataState == ISResultsViewControllerDataStateHasData)
+	{
+		return ceil([results count] / 3.0);
+	}
+	else
+		return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return [[[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:@"i"] autorelease];
+	if (self.dataState == ISResultsViewControllerDataStateLoading)
+	{
+		UITableViewCell *loadingCell = [[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:@"i"];
+		loadingCell.textLabel.text = @"Loading";
+		return [loadingCell autorelease];
+	}
+	else if (self.dataState == ISResultsViewControllerDataStateNoResults)
+	{
+		UITableViewCell *noResultsCell = [[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:@"i"];
+		noResultsCell.textLabel.text = @"No Results";
+		return [noResultsCell autorelease];
+	}
+	else
+	{
+		ISResultCell *resultCell = [[ISResultCell alloc] initWithReuseIdentifier:@"i"];
+		
+		
+		
+		[resultCell setImageUrls:urls];
+		return [resultCell autorelease];
+	}
 }
 
 #pragma mark - Table view delegate
@@ -101,6 +141,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return 100;
 }
 
 @end
