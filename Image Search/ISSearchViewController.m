@@ -102,7 +102,7 @@
 	UITextField *textField = [[UITextField alloc] initWithFrame:[self frameForSearchTextField]];
 	textField.borderStyle = UITextBorderStyleRoundedRect;
 	textField.delegate = self;
-	textField.text = @"panda";
+	textField.text = @"penguin";
 	
 	return [textField autorelease];
 }

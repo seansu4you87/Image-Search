@@ -70,12 +70,11 @@
 - (ISResultsViewControllerDataState)dataState
 {
 	if (formattedResults == nil)
-		return ISResultsViewControllerDataStateLoading;
+		return ISResultsViewControllerDataStateNoResults;
 	else if ([formattedResults count] > 0)
 		return ISResultsViewControllerDataStateHasData;
-	else {
-		return ISResultsViewControllerDataStateNoResults;
-	}
+	else
+		return ISResultsViewControllerDataStateLoading;
 }
 
 - (void)getData
@@ -131,21 +130,30 @@
 {
 	if (self.dataState == ISResultsViewControllerDataStateLoading)
 	{
-		UITableViewCell *loadingCell = [[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:@"i"];
+		NSString *reuse = @"loading";
+		UITableViewCell *loadingCell = [tableView dequeueReusableCellWithIdentifier:reuse];
+		if (loadingCell == nil)
+			loadingCell = [[[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:@"loading"] autorelease];
 		loadingCell.textLabel.text = @"Loading";
-		return [loadingCell autorelease];
+		return loadingCell;
 	}
 	else if (self.dataState == ISResultsViewControllerDataStateNoResults)
 	{
-		UITableViewCell *noResultsCell = [[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:@"i"];
+		NSString *reuse = @"no results";
+		UITableViewCell *noResultsCell = [tableView dequeueReusableCellWithIdentifier:reuse];
+		if (noResultsCell == nil)
+			noResultsCell = [[[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:@"no results"] autorelease];
 		noResultsCell.textLabel.text = @"No Results";
-		return [noResultsCell autorelease];
+		return noResultsCell;
 	}
 	else
 	{
 		if (indexPath.row < [formattedResults count])
 		{
-			ISResultCell *resultCell = [[ISResultCell alloc] initWithReuseIdentifier:@"i"];
+			NSString *reuse = @"result";
+			ISResultCell *resultCell = [tableView dequeueReusableCellWithIdentifier:reuse];
+			if (resultCell == nil)
+				resultCell = [[[ISResultCell alloc] initWithReuseIdentifier:reuse] autorelease];
 			
 			NSMutableArray *urls = [NSMutableArray array];
 			for (ISSearchResult *result in [formattedResults objectAtIndex:indexPath.row])
@@ -154,13 +162,16 @@
 			}
 			
 			[resultCell setImageUrls:urls];
-			return [resultCell autorelease];
+			return resultCell;
 		}
 		else
 		{
-			UITableViewCell *loadMoreCell = [[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:@"i"];
+			NSString *reuse = @"load more";
+			UITableViewCell *loadMoreCell = [tableView dequeueReusableCellWithIdentifier:reuse];
+			if (loadMoreCell == nil)
+				loadMoreCell = [[[UITableViewCell alloc] initWithStyle:UITableViewStylePlain reuseIdentifier:reuse] autorelease];
 			loadMoreCell.textLabel.text = @"Load More Results...";
-			return [loadMoreCell autorelease];
+			return loadMoreCell;
 		}
 	}
 }

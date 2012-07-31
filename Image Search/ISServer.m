@@ -11,6 +11,22 @@
 
 #import "AFJSONRequestOperation.h"
 
+@interface NSNull (private)
+
+- (id)objectForKey:(NSString *)key;
+
+
+@end
+
+@implementation NSNull (private)
+
+- (id)objectForKey:(NSString *)key
+{
+	
+}
+
+@end
+
 @implementation ISServer
 
 + (void)imageSearchWithQuery:(NSString *)query start:(int)start success:(void (^)(id data))success failure:(void (^)(NSError *error))failure
@@ -22,6 +38,12 @@
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
 	AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request,NSHTTPURLResponse *response, id JSON) {
+		if (![[JSON objectForKey:@"responseData"] isKindOfClass:[NSDictionary class]])
+		{
+			success(nil);
+			return;
+		}
+			
 		NSArray *results = [[JSON objectForKey:@"responseData"] objectForKey:@"results"];
 		NSMutableArray *data = [NSMutableArray array];
 		for (NSDictionary *dictionary in results)

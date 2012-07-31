@@ -538,10 +538,12 @@
 		AC6E7D4015C61C5B0016136F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Image Search/Image Search-Prefix.pch";
 				INFOPLIST_FILE = "Image Search/Image Search-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -549,10 +551,12 @@
 		AC6E7D4115C61C5B0016136F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ben Cunningham (W4BR8N742V)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Image Search/Image Search-Prefix.pch";
 				INFOPLIST_FILE = "Image Search/Image Search-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98AB5C69-A4A9-4B8F-9417-4990C4A9357F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
